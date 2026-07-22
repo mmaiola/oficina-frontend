@@ -64,12 +64,12 @@ function Clientes() {
 
       {erro && <p style={{ color: "red" }}>{erro}</p>}
 
-    <button
-  className={`btn-cliente ${mostrarForm ? "fechar" : "novo"}`}
-  onClick={() => setMostrarForm(!mostrarForm)}
->
-  {mostrarForm ? "✖ Fechar" : "➕ Novo Cliente"}
-</button>
+      <button
+        className={`btn-cliente ${mostrarForm ? " fechar" : "novo"}`}
+        onClick={() => setMostrarForm(!mostrarForm)}
+      >
+        {mostrarForm ? "❌ Fechar" : "➕ Novo Cliente"}
+      </button>
 
       {mostrarForm && (
 
@@ -139,6 +139,7 @@ function Clientes() {
               <h3>{cliente.nome}</h3>
               <p>CPF: {cliente.cpf}</p>
               <p>telefone: {cliente.telefone}</p>
+              <p>ClienteID: {cliente.id} </p>
             </div>
 
             <button onClick={() => removerCliente(cliente.id)}>

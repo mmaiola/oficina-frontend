@@ -12,6 +12,13 @@ function Veiculos() {
   const [placa, setPlaca] = useState("");
   const [modelo, setModelo] = useState("");
   const [marca, setMarca] = useState("");
+  const [ano, setAno] = useState("");
+  const [cor, setCor] = useState("");
+  const [clienteId, setClienteId] = useState("");
+
+
+
+
 
   useEffect(() => {
     carregarVeiculos();
@@ -32,17 +39,31 @@ function Veiculos() {
   async function cadastrarVeiculo(e) {
     e.preventDefault();
 
-    const novoVeiculo = { placa, modelo, marca };
+    const novoVeiculo = {
+      placa,
+      marca,
+      modelo,
+      ano: Number(ano),
+      cor,
+      clienteId: Number(clienteId),
+    };
+     console.log(novoVeiculo);
 
     try {
       await veiculosService.criar(novoVeiculo);
+      console.log(novoVeiculo);
       setPlaca("");
       setModelo("");
       setMarca("");
+      setAno("");
+      setCor("");
+      setClienteId("");
       setMostrarForm(false);
       carregarVeiculos();
     } catch (err) {
       console.error(err);
+      console.log(err.response);
+      console.log(err.response?.data);
       setErro("Erro ao cadastrar veículo.");
     }
   }
@@ -65,7 +86,7 @@ function Veiculos() {
       {erro && <p style={{ color: "red" }}>{erro}</p>}
 
       <button onClick={() => setMostrarForm(!mostrarForm)}>
-        {mostrarForm ? "Fechar" : "Novo Veículo"}
+        {mostrarForm ? "❌ Fechar" : "➕ Novo Veículo"}
       </button>
 
       {mostrarForm && (
@@ -104,15 +125,30 @@ function Veiculos() {
           />
 
 
+          <input
+            type="number"
+            placeholder="Ano"
+            value={ano}
+            onChange={(e) => setAno(e.target.value)}
+          />
 
-        
+
 
           <input
             type="text"
-            placeholder="Modelo"
-            value={modelo}
-            onChange={(e) => setModelo(e.target.value)}
+            placeholder="Cor"
+            value={cor}
+            onChange={(e) => setCor(e.target.value)}
           />
+
+          <input
+            type="text"
+            placeholder="ClienteId"
+            value={clienteId}
+            onChange={(e) => setClienteId(e.target.value)}
+          />
+
+
 
 
 

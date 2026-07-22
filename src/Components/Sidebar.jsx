@@ -1,65 +1,63 @@
+import { useState } from "react";
+import "./Sidebar.css";
+
 function Sidebar({ pagina, setPagina }) {
 
-  const sidebarStyle = {
-    width: "250px",
-    background: "#1e1e2f",
-    color: "white",
-    padding: "20px",
-    minHeight: "100vh"
-  };
-
-  const botaoStyle = (ativa) => ({
-    width: "100%",
-    padding: "12px",
-    marginBottom: "10px",
-    border: "none",
-    borderRadius: "8px",
-    cursor: "pointer",
-    background: ativa ? "#6c63ff" : "#2d2d44",
-    color: "white",
-    textAlign: "left",
-    fontSize: "16px"
-  });
+  const [aberta, setAberta] = useState(true);
 
   return (
-    <div style={sidebarStyle}>
-
-      <h2>Oficina</h2>
+    <div className={aberta ? "sidebar aberta" : "sidebar fechada"}>
 
       <button
-        style={botaoStyle(pagina === "Inicio")}
+        className="menu-btn"
+        onClick={() => setAberta(!aberta)}
+      >
+        ☰
+      </button>
+
+
+      {aberta && <h2>Oficina</h2>}
+
+
+      <button
+        className={pagina === "Inicio" ? "ativo" : ""}
         onClick={() => setPagina("Inicio")}
       >
-        Inicio
+        🏠 {aberta && "Inicio"}
       </button>
 
+
       <button
-        style={botaoStyle(pagina === "Dashboard")}
+        className={pagina === "Dashboard" ? "ativo" : ""}
         onClick={() => setPagina("Dashboard")}
       >
-        Dashboard
+        📊 {aberta && "Dashboard"}
       </button>
 
+
       <button
-        style={botaoStyle(pagina === "Clientes")}
+        className={pagina === "Clientes" ? "ativo" : ""}
         onClick={() => setPagina("Clientes")}
       >
-        Clientes
+        👥 {aberta && "Clientes"}
       </button>
 
+
       <button
-        style={botaoStyle(pagina === "Veiculos")}
+        className={pagina === "Veiculos" ? "ativo" : ""}
         onClick={() => setPagina("Veiculos")}
       >
-        Veículos
+        🚗 {aberta && "Veículos"}
       </button>
 
+
       <button
-        style={botaoStyle(pagina === "Relatorios")}
+        className={pagina === "Relatorios" ? "ativo" : ""}
         onClick={() => setPagina("Relatorios")}
       >
-        Relatórios
+        📈 {aberta && "Relatórios"}
       </button>
+
 
     </div>
   );
